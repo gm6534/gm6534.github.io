@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghulam Mustafa — Senior Mobile App Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;700&family=Roboto:wght@300;400;500&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+  :root {
+    --md-sys-color-primary: #0057D9;
+    --md-sys-color-on-primary: #FFFFFF;
+    --md-sys-color-primary-container: #D8E2FF;
+    --md-sys-color-on-primary-container: #001553;
+    --md-sys-color-secondary: #00639B;
+    --md-sys-color-secondary-container: #CEE5FF;
+    --md-sys-color-tertiary: #6B35C4;
+    --md-sys-color-tertiary-container: #ECDCFF;
+    --md-sys-color-surface: #F8F9FF;
+    --md-sys-color-surface-container: #ECEEFF;
+    --md-sys-color-surface-container-high: #E2E4F0;
+    --md-sys-color-surface-variant: #E0E3F0;
+    --md-sys-color-on-surface: #191C25;
+    --md-sys-color-on-surface-variant: #44475A;
+    --md-sys-color-outline: #757A8B;
+    --md-sys-color-outline-variant: #C4C7D8;
+    --md-sys-color-error: #BA1A1A;
+    --md-elevation-1: none;
+    --md-elevation-2: none;
+    --md-elevation-3: none;
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 28px;
+    --radius-full: 999px;
+    --font-display: 'Google Sans Display', 'Google Sans', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --font-label: 'Google Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,249,255,.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: var(--md-elevation-2); }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 700;
+    color: var(--md-sys-color-primary);
+    letter-spacing: -.5px;
+  }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    font-family: var(--font-label); font-size: 14px; font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none; padding: 8px 16px;
+    border-radius: var(--radius-full);
+    transition: background .2s, color .2s;
+  }
+  .nav-links a:hover {
+    background: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-primary);
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 64px 40px;
+    gap: 48px;
+    background: linear-gradient(135deg, var(--md-sys-color-surface) 60%, var(--md-sys-color-primary-container) 100%);
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; top: -120px; right: -80px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,87,217,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  #hero::after {
+    content: '';
+    position: absolute; bottom: -100px; left: 200px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,53,196,.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-text { animation: slideUp .8s cubic-bezier(.34,1.56,.64,1) both; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-primary);
+    font-family: var(--font-label); font-size: 12px; font-weight: 500;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: var(--radius-full);
+    margin-bottom: 24px;
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 700; line-height: 1.08;
+    color: var(--md-sys-color-on-surface);
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+  }
+  .hero-name span { color: var(--md-sys-color-primary); }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 400; color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 24px; letter-spacing: -.5px;
+  }
+  .hero-desc {
+    font-size: 16px; line-height: 1.7;
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 480px; margin-bottom: 40px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* Buttons */
+  .btn-filled {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    font-family: var(--font-label); font-size: 14px; font-weight: 500;
+    padding: 12px 24px; border-radius: var(--radius-full);
+    text-decoration: none; transition: box-shadow .2s, transform .15s;
+    box-shadow: var(--md-elevation-1);
+  }
+  .btn-filled:hover { transform: translateY(-1px); }
+  .btn-tonal {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-secondary);
+    font-family: var(--font-label); font-size: 14px; font-weight: 500;
+    padding: 12px 24px; border-radius: var(--radius-full);
+    text-decoration: none; transition: box-shadow .2s, transform .15s;
+  }
+  .btn-tonal:hover { transform: translateY(-1px); }
+  .btn-outlined {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--md-sys-color-primary);
+    font-family: var(--font-label); font-size: 14px; font-weight: 500;
+    padding: 12px 24px; border-radius: var(--radius-full);
+    border: 1.5px solid var(--md-sys-color-primary);
+    text-decoration: none; transition: background .2s;
+  }
+  .btn-outlined:hover { background: var(--md-sys-color-primary-container); }
+
+  /* Hero Card */
+  .hero-card {
+    animation: slideUp .9s .15s cubic-bezier(.34,1.56,.64,1) both;
+    background: white;
+    border-radius: 32px;
+    padding: 40px;
+    box-shadow: var(--md-elevation-3);
+    position: relative; z-index: 1;
+  }
+  .hero-avatar {
+    width: 96px; height: 96px; border-radius: 50%;
+    background: var(--md-sys-color-primary-container);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 36px; font-weight: 700;
+    color: var(--md-sys-color-primary);
+    margin-bottom: 20px;
+  }
+  .hero-card h3 {
+    font-family: var(--font-display); font-size: 22px; font-weight: 700;
+    color: var(--md-sys-color-on-surface); margin-bottom: 4px;
+  }
+  .hero-card p {
+    font-size: 14px; color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 24px;
+  }
+  .stat-row { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+  .stat-chip {
+    background: var(--md-sys-color-surface-container);
+    border-radius: var(--radius-md); padding: 12px 16px;
+    flex: 1; min-width: 80px; text-align: center;
+  }
+  .stat-chip .num {
+    font-family: var(--font-display); font-size: 24px; font-weight: 700;
+    color: var(--md-sys-color-primary); display: block;
+  }
+  .stat-chip .lbl {
+    font-size: 11px; font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 8px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px; border-radius: var(--radius-md);
+    background: var(--md-sys-color-surface);
+    text-decoration: none; color: var(--md-sys-color-on-surface);
+    font-size: 13px; font-weight: 500;
+    transition: background .2s;
+    border: 1px solid var(--md-sys-color-outline-variant);
+  }
+  .contact-link:hover { background: var(--md-sys-color-primary-container); }
+  .contact-link .icon { font-size: 18px; color: var(--md-sys-color-primary); }
+
+  /* ─── SECTION ─── */
+  section { padding: 80px 64px; }
+  .section-header { margin-bottom: 48px; }
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-label); font-size: 12px; font-weight: 500;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--md-sys-color-primary); margin-bottom: 12px;
+  }
+  .section-eyebrow::before {
+    content: ''; display: block; width: 24px; height: 2px;
+    background: var(--md-sys-color-primary); border-radius: 2px;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(28px, 3vw, 40px);
+    font-weight: 700; letter-spacing: -1px;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  /* ─── SKILLS ─── */
+  #skills { background: var(--md-sys-color-surface-container); }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .skill-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface);
+    font-family: var(--font-label); font-size: 14px; font-weight: 500;
+    padding: 10px 20px; border-radius: var(--radius-full);
+    box-shadow: var(--md-elevation-1);
+    transition: background .2s, box-shadow .2s, transform .15s;
+    cursor: default;
+  }
+  .skill-chip:hover {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-primary);
+    transform: translateY(-2px);
+  }
+  .skill-chip .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--md-sys-color-primary);
+  }
+
+  /* ─── EXPERIENCE ─── */
+  #experience { background: var(--md-sys-color-surface); }
+  .exp-timeline { position: relative; }
+  .exp-timeline::before {
+    content: ''; position: absolute; left: 16px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--md-sys-color-outline-variant);
+  }
+  .exp-item {
+    display: flex; gap: 32px; margin-bottom: 32px;
+    animation: fadeIn .6s both;
+  }
+  .exp-dot {
+    width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+    background: var(--md-sys-color-primary-container);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+    border: 2px solid var(--md-sys-color-primary);
+    margin-top: 4px;
+  }
+  .exp-dot .icon { font-size: 16px; color: var(--md-sys-color-primary); }
+  .exp-card {
+    flex: 1;
+    background: white; border-radius: var(--radius-xl);
+    padding: 28px 32px;
+    box-shadow: var(--md-elevation-1);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    transition: box-shadow .2s, transform .2s;
+  }
+  .exp-card:hover { transform: translateY(-2px); }
+  .exp-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px; flex-wrap: wrap; gap: 8px;
+  }
+  .exp-role {
+    font-family: var(--font-display); font-size: 18px; font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+  }
+  .exp-date {
+    font-family: var(--font-label); font-size: 12px; font-weight: 500;
+    color: var(--md-sys-color-primary);
+    background: var(--md-sys-color-primary-container);
+    padding: 4px 12px; border-radius: var(--radius-full);
+  }
+  .exp-company {
+    font-size: 14px; font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 16px;
+  }
+  .exp-project-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-tertiary);
+    font-family: var(--font-label); font-size: 12px; font-weight: 500;
+    padding: 4px 12px; border-radius: var(--radius-full);
+    margin-bottom: 16px;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .exp-bullets li {
+    font-size: 14px; line-height: 1.6;
+    color: var(--md-sys-color-on-surface-variant);
+    padding-left: 20px; position: relative;
+  }
+  .exp-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 8px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--md-sys-color-primary);
+  }
+  .exp-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tech-tag {
+    background: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface-variant);
+    font-family: var(--font-label); font-size: 12px; font-weight: 500;
+    padding: 4px 12px; border-radius: var(--radius-full);
+    border: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  /* ─── PROJECTS ─── */
+  #projects { background: var(--md-sys-color-surface-container); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+  .project-card {
+    background: white; border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--md-elevation-1);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    transition: box-shadow .25s, transform .25s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover { transform: translateY(-4px); }
+  .project-header {
+    padding: 28px 28px 0;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .project-icon {
+    width: 56px; height: 56px; border-radius: var(--radius-lg); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+  }
+  .project-icon.blue { background: var(--md-sys-color-primary-container); }
+  .project-icon.purple { background: var(--md-sys-color-tertiary-container); }
+  .project-icon.teal { background: var(--md-sys-color-secondary-container); }
+  .project-icon.orange { background: #FFE8D5; }
+  .project-title {
+    font-family: var(--font-display); font-size: 18px; font-weight: 700;
+    color: var(--md-sys-color-on-surface); margin-bottom: 4px;
+  }
+  .project-sub {
+    font-size: 13px; color: var(--md-sys-color-on-surface-variant);
+  }
+  .project-body { padding: 20px 28px 28px; flex: 1; display: flex; flex-direction: column; }
+  .project-desc {
+    font-size: 14px; line-height: 1.65;
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 20px; flex: 1;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* ─── EDUCATION ─── */
+  #education { background: var(--md-sys-color-surface); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .edu-card {
+    background: white; border-radius: var(--radius-xl); padding: 32px;
+    box-shadow: var(--md-elevation-1);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    display: flex; gap: 20px; align-items: flex-start;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .edu-card:hover { transform: translateY(-2px); }
+  .edu-icon {
+    width: 48px; height: 48px; border-radius: var(--radius-md); flex-shrink: 0;
+    background: var(--md-sys-color-primary-container);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .edu-degree {
+    font-family: var(--font-display); font-size: 17px; font-weight: 700;
+    color: var(--md-sys-color-on-surface); margin-bottom: 4px;
+  }
+  .edu-school { font-size: 14px; color: var(--md-sys-color-primary); font-weight: 500; margin-bottom: 4px; }
+  .edu-year { font-size: 13px; color: var(--md-sys-color-on-surface-variant); }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, #0035A8 100%);
+    color: white; text-align: center;
+  }
+  #contact .section-eyebrow { color: rgba(255,255,255,.75); }
+  #contact .section-eyebrow::before { background: rgba(255,255,255,.75); }
+  #contact .section-title { color: white; }
+  #contact p { color: rgba(255,255,255,.8); font-size: 16px; max-width: 500px; margin: 16px auto 40px; }
+  .contact-grid {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+    max-width: 600px; margin: 0 auto;
+  }
+  .contact-card {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-xl); padding: 20px 28px;
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none; color: white;
+    transition: background .2s, transform .2s;
+    min-width: 220px;
+  }
+  .contact-card:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); }
+  .contact-card .icon { font-size: 22px; }
+  .contact-card .label { font-size: 12px; opacity: .7; }
+  .contact-card .value { font-family: var(--font-label); font-size: 14px; font-weight: 500; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--md-sys-color-surface-container-high);
+    padding: 24px 64px; text-align: center;
+    font-size: 13px; color: var(--md-sys-color-on-surface-variant);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s cubic-bezier(.34,1.2,.64,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; padding: 100px 24px 48px; }
+    section { padding: 60px 24px; }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="topNav">
+  <div class="nav-logo">GM</div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#publications">Publications</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="btn-filled" href="/cdn-cgi/l/email-protection#487e7d7b7c2f25082f25292124662b2725" style="font-size:13px;padding:9px 18px;">
+    <span class="material-icons-round" style="font-size:16px;">mail</span>
+    Hire Me
+  </a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">
+      <span class="material-icons-round" style="font-size:14px;">verified</span>
+      Available for opportunities
+    </div>
+    <h1 class="hero-name">Ghulam<br><span>Mustafa</span></h1>
+    <p class="hero-title">Senior Mobile App Developer</p>
+    <p class="hero-desc">
+      Specializing in high-performance, cross-platform mobile apps using Flutter &amp; Dart. Currently leading mobile development at APNA Microfinance Bank — building enterprise-grade banking, biometric, and AI-powered applications with 5+ years of real-world impact.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-filled" href="#projects">
+        <span class="material-icons-round" style="font-size:16px;">code</span>
+        View Projects
+      </a>
+      <a class="btn-tonal" href="#contact">
+        <span class="material-icons-round" style="font-size:16px;">contact_page</span>
+        Get In Touch
+      </a>
+      <a class="btn-outlined" href="https://github.com/gm6534" target="_blank">
+        <span style="font-size:16px;">⌥</span>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-avatar">GM</div>
+    <h3>Ghulam Mustafa</h3>
+    <p>Senior Mobile App Developer · Lahore, Pakistan</p>
+    <div class="stat-row">
+      <div class="stat-chip">
+        <span class="num">5+</span>
+        <span class="lbl">Years Exp</span>
+      </div>
+      <div class="stat-chip">
+        <span class="num">10+</span>
+        <span class="lbl">Apps Built</span>
+      </div>
+      <div class="stat-chip">
+        <span class="num">3</span>
+        <span class="lbl">Stores</span>
+      </div>
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="/cdn-cgi/l/email-protection#c8fefdfbfcafa588afa5a9a1a4e6aba7a5">
+        <span class="material-icons-round icon">mail</span>
+        <span class="__cf_email__" data-cfemail="4771727473202a07202a262e2b6924282a">[email&#160;protected]</span>
+      </a>
+      <a class="contact-link" href="tel:+923174953538">
+        <span class="material-icons-round icon">phone</span>
+        +92 317 4953538
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/gm4953/" target="_blank">
+        <span class="material-icons-round icon">link</span>
+        linkedin.com/in/gm4953
+      </a>
+      <a class="contact-link" href="https://github.com/gm6534" target="_blank">
+        <span class="material-icons-round icon">code</span>
+        github.com/gm6534
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">What I work with</div>
+    <h2 class="section-title">Skills &amp; Technologies</h2>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-chip"><span class="dot"></span> Flutter</div>
+    <div class="skill-chip"><span class="dot"></span> Dart</div>
+    <div class="skill-chip"><span class="dot"></span> Kotlin</div>
+    <div class="skill-chip"><span class="dot"></span> Swift</div>
+    <div class="skill-chip"><span class="dot"></span> Jetpack Compose</div>
+    <div class="skill-chip"><span class="dot"></span> BLoC</div>
+    <div class="skill-chip"><span class="dot"></span> Provider</div>
+    <div class="skill-chip"><span class="dot"></span> GetX</div>
+    <div class="skill-chip"><span class="dot"></span> Clean Architecture</div>
+    <div class="skill-chip"><span class="dot"></span> MVC / MVVM</div>
+    <div class="skill-chip"><span class="dot"></span> Firebase (Firestore, FCM)</div>
+    <div class="skill-chip"><span class="dot"></span> SQLite / Hive</div>
+    <div class="skill-chip"><span class="dot"></span> RESTful APIs</div>
+    <div class="skill-chip"><span class="dot"></span> Twilio SDK</div>
+    <div class="skill-chip"><span class="dot"></span> Zoom Video SDK</div>
+    <div class="skill-chip"><span class="dot"></span> VOIP Systems</div>
+    <div class="skill-chip"><span class="dot"></span> Biometric Verification SDK</div>
+    <div class="skill-chip"><span class="dot"></span> Stripe Payments</div>
+    <div class="skill-chip"><span class="dot"></span> In-App Purchases</div>
+    <div class="skill-chip"><span class="dot"></span> Google Maps API</div>
+    <div class="skill-chip"><span class="dot"></span> Push Notifications</div>
+    <div class="skill-chip"><span class="dot"></span> Flutter Flavors</div>
+    <div class="skill-chip"><span class="dot"></span> CI/CD (GitHub CI)</div>
+    <div class="skill-chip"><span class="dot"></span> Git / GitHub / GitLab</div>
+    <div class="skill-chip"><span class="dot"></span> Google Play Store</div>
+    <div class="skill-chip"><span class="dot"></span> iOS App Store</div>
+    <div class="skill-chip"><span class="dot"></span> Huawei App Gallery</div>
+    <div class="skill-chip"><span class="dot"></span> Agora / Admob</div>
+    <div class="skill-chip"><span class="dot"></span> ChatGPT APIs</div>
+    <div class="skill-chip"><span class="dot"></span> Material Design</div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Career</div>
+    <h2 class="section-title">Work Experience</h2>
+  </div>
+
+  <div class="exp-timeline">
+
+    <div class="exp-item reveal">
+      <div class="exp-dot"><span class="material-icons-round icon">star</span></div>
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-role">Mobile App Developer | Team Lead</div>
+          <div class="exp-date">Apr 2025 – Present</div>
+        </div>
+        <div class="exp-company">🏦 APNA Microfinance Bank Ltd · Lahore, Pakistan</div>
+        <ul class="exp-bullets">
+          <li>Lead the architecture and development of enterprise-grade Flutter banking apps enhancing digital financial services.</li>
+          <li>Integrated secure biometric verification systems and built a seamless digital onboarding application for new customers.</li>
+          <li>Collaborate with cross-functional teams to deliver scalable, secure, and user-friendly solutions meeting business and regulatory requirements.</li>
+          <li>Mentor and guide a team of Flutter developers, ensuring code quality, best practices, and agile delivery.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+          <span class="tech-tag">Biometric SDK</span>
+          <span class="tech-tag">Clean Architecture</span>
+          <span class="tech-tag">Team Lead</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dot"><span class="material-icons-round icon">work</span></div>
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-role">Software Engineer</div>
+          <div class="exp-date">Jun 2023 – Apr 2025</div>
+        </div>
+        <div class="exp-company">🏢 Autosmart Tech · Lahore, Pakistan</div>
+        <ul class="exp-bullets">
+          <li>Developed and maintained real-world Flutter apps — Booking, Appointment, Chat, and E-Commerce platforms.</li>
+          <li>Integrated Twilio APIs for messaging, voice, and video, plus Zoom SDK for real-time video conferencing.</li>
+          <li>Built VOIP Calling Systems, collaborated with UI/UX designers, and ensured secure, performant applications.</li>
+          <li>Used Flutter Flavors, BLoC state management, and Clean Architecture throughout the project lifecycle.</li>
+          <li>Integrated .NET APIs for backend communication and maintained version control with Git.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">BLoC</span>
+          <span class="tech-tag">Twilio</span>
+          <span class="tech-tag">Zoom SDK</span>
+          <span class="tech-tag">VOIP</span>
+          <span class="tech-tag">.NET APIs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dot"><span class="material-icons-round icon">work</span></div>
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-role">Flutter Developer | Team Lead</div>
+          <div class="exp-date">Jan 2023 – Jun 2023</div>
+        </div>
+        <div class="exp-company">🏢 The Brainstormers · Lahore, Pakistan</div>
+        <div class="exp-project-badge">
+          <span class="material-icons-round" style="font-size:14px;">school</span>
+          American Lyceum International School System
+        </div>
+        <ul class="exp-bullets">
+          <li>Led Flutter mobile app development, designing intuitive UIs and writing clean, maintainable Dart code.</li>
+          <li>Integrated third-party APIs and managed app databases using SQLite and Firebase.</li>
+          <li>Oversaw app deployment and updates across Google Play, Apple App Store, and Huawei App Gallery.</li>
+          <li>Collaborated with developers, designers, and stakeholders to align apps with project goals.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Firebase</span>
+          <span class="tech-tag">SQLite</span>
+          <span class="tech-tag">Google Play</span>
+          <span class="tech-tag">App Store</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dot"><span class="material-icons-round icon">work</span></div>
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-role">Flutter Developer</div>
+          <div class="exp-date">Jan 2022 – Jan 2023</div>
+        </div>
+        <div class="exp-company">🏢 Deviate Agency · Lahore, Pakistan</div>
+        <ul class="exp-bullets">
+          <li>Built and maintained cross-platform Flutter apps for real-world clients including international stakeholders.</li>
+          <li>Wrote clean Dart code, debugged APIs, handled response data, and applied various state management techniques.</li>
+          <li>Participated in client and team meetings, contributed to code reviews and technical documentation.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+          <span class="tech-tag">State Management</span>
+          <span class="tech-tag">REST APIs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dot"><span class="material-icons-round icon">school</span></div>
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-role">Junior Flutter Developer</div>
+          <div class="exp-date">Jan 2021 – Dec 2021</div>
+        </div>
+        <div class="exp-company">🌐 Triisum · Remote, Pakistan</div>
+        <ul class="exp-bullets">
+          <li>Contributed to the full app lifecycle — building UI screens, testing, and deployment for the Triisum app.</li>
+          <li>Collaborated with senior developers, wrote clean code, fixed bugs, and improved user experience.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+          <span class="tech-tag">UI Development</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Portfolio</div>
+    <h2 class="section-title">Featured Projects</h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon blue">🏦</div>
+        <div>
+          <div class="project-title">Apna BVS</div>
+          <div class="project-sub">Biometric Verification System</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Internal mobile app for APNA Microfinance Bank enabling secure biometric verification by field agents. Integrates the Aratek A700 Scanner via OTG — eliminating expensive dedicated tablets. Built with Flutter + native Android SDK.</p>
+        <div class="project-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Aratek SDK</span>
+          <span class="tech-tag">Android Native</span>
+          <a class="tech-tag" href="https://play.google.com/store/apps/details?id=com.apnabank.bvs" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ Play Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon teal">🛒</div>
+        <div>
+          <div class="project-title">Maalco Foods</div>
+          <div class="project-sub">Online Grocery Delivery App</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Flutter e-commerce grocery app with 10,000+ downloads, live in Somalia. Features real-time order tracking, location-based delivery, Firebase authentication and data management for a seamless shopping experience.</p>
+        <div class="project-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Firebase</span>
+          <span class="tech-tag">Google Maps</span>
+          <a class="tech-tag" href="https://play.google.com/store/apps/details?id=com.maalco.maalco&hl=en" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ Play Store</a>
+          <a class="tech-tag" href="https://apps.apple.com/us/app/maalco-foods/id6751731191" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ App Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon purple">📋</div>
+        <div>
+          <div class="project-title">TLS AMS App</div>
+          <div class="project-sub">Assessment Management System</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Secure mobile solution for UK government and public sector candidates to submit written assessments by uploading images. Streamlines submission workflows for both candidates and assessors with a focus on data integrity.</p>
+        <div class="project-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">iOS &amp; Android</span>
+          <a class="tech-tag" href="https://apps.apple.com/pk/app/tls-ams/id6741712139" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ App Store</a>
+          <a class="tech-tag" href="https://play.google.com/store/apps/details?id=ams.tlsexaminations.com" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ Play Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon orange">👥</div>
+        <div>
+          <div class="project-title">Coach &amp; Lead</div>
+          <div class="project-sub">Workforce Management Solution</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">All-in-one workforce app for employees and managers — clock in/out, holiday requests, leave management, and team visibility tools. Built with Flutter for an intuitive cross-platform experience.</p>
+        <div class="project-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Workforce Mgmt</span>
+          <a class="tech-tag" href="https://apps.apple.com/pk/app/coach-lead/id6740913581" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ App Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon blue">🐛</div>
+        <div>
+          <div class="project-title">LNPS App</div>
+          <div class="project-sub">London Pest Control System</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Flutter-based field operations app for pest control technicians — job scheduling, real-time status updates, Environmental Risk Assessments, job reports with media, and historical booking search.</p>
+        <div class="project-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Field Ops</span>
+          <a class="tech-tag" href="https://play.google.com/store/apps/details?id=com.lnpestsolutions.lnpsprod" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ Play Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon teal">🌍</div>
+        <div>
+          <div class="project-title">TLS Interpreting App</div>
+          <div class="project-sub">The Language Shop</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Mobile app for UK public sector interpreters to manage assignments, bookings, timesheets, and training resources. Provides a centralized, efficient workflow for both freelance and in-house interpreters.</p>
+        <div class="project-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">UK Public Sector</span>
+          <a class="tech-tag" href="https://apps.apple.com/gb/app/tls-interpreting-app/id1644160088" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ App Store</a>
+          <a class="tech-tag" href="https://play.google.com/store/apps/details?id=org.languageshop.tls" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ Play Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon purple">🤖</div>
+        <div>
+          <div class="project-title">GPT Stories For Kids</div>
+          <div class="project-sub">AI-Powered Children's App</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">A Flutter app powered by ChatGPT APIs that delivers age-appropriate stories for children, read aloud with animated illustrations and sound effects. Simple navigation promotes reading and storytelling for kids.</p>
+        <div class="project-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">ChatGPT API</span>
+          <span class="tech-tag">AI</span>
+          <span class="tech-tag">Text-to-Speech</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon orange">✈️</div>
+        <div>
+          <div class="project-title">Triisum</div>
+          <div class="project-sub">AI Personalized Tour Booking</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">AI-powered travel planning and booking Flutter app offering personalized itinerary creation, smart recommendations, and hassle-free booking — tailored to user preferences and interests.</p>
+        <div class="project-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">AI / ML</span>
+          <a class="tech-tag" href="https://play.google.com/store/apps/details?id=com.triisum.pk" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ Play Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon blue">🎓</div>
+        <div>
+          <div class="project-title">American Lyceum SLMS</div>
+          <div class="project-sub">Staff &amp; Student Learning Apps</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Dual-app Flutter SLMS suite for American Lyceum — Staff app with HR, Attendance, and Accountant tools; Student app for course registration, progress tracking, and certificate management.</p>
+        <div class="project-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">EdTech</span>
+          <a class="tech-tag" href="https://play.google.com/store/apps/details?id=com.americanlyceum.staff" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ Staff App</a>
+          <a class="tech-tag" href="https://play.google.com/store/apps/details?id=com.lyceumgroupofschools.student" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">▶ Student App</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" style="background: var(--md-sys-color-surface);">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Open Source</div>
+    <h2 class="section-title">Publications</h2>
+  </div>
+  <div class="reveal" style="max-width: 760px;">
+    <div class="exp-card" style="display:flex; gap:24px; align-items:flex-start;">
+      <div style="width:56px;height:56px;border-radius:var(--radius-lg);background:var(--md-sys-color-primary-container);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">📦</div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px;">
+          <div class="exp-role">Adoptive Calendar</div>
+          <div class="exp-date">2023</div>
+        </div>
+        <div class="exp-company" style="margin-bottom:12px;">Flutter Package · Date &amp; Time Picker · pub.dev</div>
+        <p style="font-size:14px;line-height:1.65;color:var(--md-sys-color-on-surface-variant);margin-bottom:16px;">
+          A Flutter package featuring a sleek Date and Time Picker with the elegant iOS 14 Calendar view style in a Cupertino framework. Offers a rich array of themes, full responsiveness across screen sizes and orientations, and supports Android, iOS, macOS, Windows, Web, and Linux.
+        </p>
+        <div class="exp-tech">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+          <span class="tech-tag">Cupertino</span>
+          <span class="tech-tag">Cross-platform</span>
+          <span class="tech-tag">pub.dev</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Academic Background</div>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Bachelor in Software Engineering</div>
+        <div class="edu-school">University of South Asia</div>
+        <div class="edu-year">2018 – 2022 · 47, Tufail Road, Lahore</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">Let's Connect</div>
+  <h2 class="section-title">Get In Touch</h2>
+  <p>Open to new opportunities, freelance projects, and collaborations. Let's build something great together.</p>
+  <div class="contact-grid">
+    <a class="contact-card" href="/cdn-cgi/l/email-protection#6254575156050f22050f030b0e4c010d0f">
+      <span class="material-icons-round icon">mail</span>
+      <div>
+        <div class="label">Email</div>
+        <div class="value"><span class="__cf_email__" data-cfemail="ccfaf9fff8aba18caba1ada5a0e2afa3a1">[email&#160;protected]</span></div>
+      </div>
+    </a>
+    <a class="contact-card" href="tel:+923174953538">
+      <span class="material-icons-round icon">phone</span>
+      <div>
+        <div class="label">Phone / WhatsApp</div>
+        <div class="value">+92 317 4953538</div>
+      </div>
+    </a>
+    <a class="contact-card" href="https://www.linkedin.com/in/gm4953/" target="_blank">
+      <span class="material-icons-round icon">link</span>
+      <div>
+        <div class="label">LinkedIn</div>
+        <div class="value">linkedin.com/in/gm4953</div>
+      </div>
+    </a>
+    <a class="contact-card" href="https://github.com/gm6534" target="_blank">
+      <span class="material-icons-round icon">code</span>
+      <div>
+        <div class="label">GitHub</div>
+        <div class="value">github.com/gm6534</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Ghulam Mustafa · Senior Mobile App Developer · Lahore, Pakistan · Built with Material Expressive</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Nav scroll
+  const nav = document.getElementById('topNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll reveal
+  const re
