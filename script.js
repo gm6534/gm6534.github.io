@@ -1,0 +1,426 @@
+/* ============================================
+   GHULAM MUSTAFA — Material Expressive Portfolio
+   Interactive JavaScript Module
+   ============================================ */
+
+(function () {
+  'use strict';
+
+  // ========================================
+  // PAGE LOADER
+  // ========================================
+  window.addEventListener('load', () => {
+    const loader = document.querySelector('.page-loader');
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        setTimeout(() => loader.remove(), 500);
+      }, 600);
+    }
+  });
+
+  // ========================================
+  // SCROLL PROGRESS BAR
+  // ========================================
+  const scrollProgress = document.querySelector('.scroll-progress');
+  function updateScrollProgress() {
+    if (!scrollProgress) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollProgress.style.width = progress + '%';
+  }
+
+  // ========================================
+  // NAVIGATION
+  // ========================================
+  const nav = document.getElementById('topNav');
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+
+  function toggleMobileMenu() {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+    if (mobileOverlay) {
+      mobileOverlay.classList.toggle('active');
+    }
+    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+  }
+
+  function closeMobileMenu() {
+    if (hamburger && hamburger.classList.contains('open')) {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+      if (mobileOverlay) mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleMobileMenu);
+  }
+
+  if (mobileOverlay) {
+    mobileOverlay.addEventListener('click', closeMobileMenu);
+  }
+
+  // Close mobile menu on nav link click
+  if (navLinks) {
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+  }
+
+  // Nav scroll effect
+  function handleNavScroll() {
+    if (nav) {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }
+  }
+
+  // Active nav link highlighting
+  const sections = document.querySelectorAll('section[id]');
+  function highlightActiveNav() {
+    const scrollY = window.scrollY + 100;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+      const navLink = navLinks?.querySelector(`a[href="#${sectionId}"]`);
+      if (navLink) {
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          navLink.classList.add('active');
+        } else {
+          navLink.classList.remove('active');
+        }
+      }
+    });
+  }
+
+  // ========================================
+  // SCROLL REVEAL (Intersection Observer)
+  // ========================================
+  function initScrollReveal() {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -60px 0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Don't unobserve to allow re-entry effects if needed
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  // ========================================
+  // BACK TO TOP BUTTON
+  // ========================================
+  const backToTop = document.querySelector('.back-to-top');
+  function handleBackToTop() {
+    if (!backToTop) return;
+    if (window.scrollY > 400) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  }
+
+  if (backToTop) {
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ========================================
+  // CURSOR GLOW EFFECT (Desktop Only)
+  // ========================================
+  const cursorGlow = document.querySelector('.cursor-glow');
+  function handleCursorGlow(e) {
+    if (!cursorGlow) return;
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+  }
+
+  if (cursorGlow && window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', handleCursorGlow);
+  }
+
+  // ========================================
+  // TILT EFFECT ON HERO CARD
+  // ========================================
+  const heroCard = document.querySelector('.hero-card');
+  if (heroCard && window.matchMedia('(pointer: fine)').matches) {
+    heroCard.addEventListener('mousemove', (e) => {
+      const rect = heroCard.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -4;
+      const rotateY = ((x - centerX) / centerX) * 4;
+      heroCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    heroCard.addEventListener('mouseleave', () => {
+      heroCard.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  }
+
+  // ========================================
+  // SMOOTH ANCHOR SCROLLING
+  // ========================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        const navHeight = nav ? nav.offsetHeight : 0;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // ========================================
+  // COUNTER ANIMATION FOR STATS
+  // ========================================
+  function animateCounters() {
+    const statNums = document.querySelectorAll('.stat-chip .num');
+    const observerOptions = {
+      threshold: 0.8
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          entry.target.dataset.animated = 'true';
+          const target = entry.target.textContent.trim();
+          const number = parseInt(target);
+          const suffix = target.replace(/[0-9]/g, '');
+          if (!isNaN(number)) {
+            let current = 0;
+            const increment = Math.max(1, Math.floor(number / 30));
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= number) {
+                current = number;
+                clearInterval(timer);
+              }
+              entry.target.textContent = current + suffix;
+            }, 40);
+          }
+        }
+      });
+    }, observerOptions);
+
+    statNums.forEach(num => counterObserver.observe(num));
+  }
+
+  // ========================================
+  // SKILL CHIPS STAGGER ANIMATION
+  // ========================================
+  function initSkillChipAnimation() {
+    const skillsGrid = document.querySelector('.skills-grid');
+    if (!skillsGrid) return;
+
+    const chips = skillsGrid.querySelectorAll('.skill-chip');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          chips.forEach((chip, index) => {
+            chip.style.animationDelay = `${index * 0.04}s`;
+            chip.classList.add('animate-in');
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(skillsGrid);
+  }
+
+  // Add CSS for skill chip animation
+  const skillAnimStyle = document.createElement('style');
+  skillAnimStyle.textContent = `
+    .skill-chip {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+    }
+    .skill-chip.animate-in {
+      animation: chipIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes chipIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+  `;
+  document.head.appendChild(skillAnimStyle);
+
+  // ========================================
+  // TYPING EFFECT FOR HERO TITLE
+  // ========================================
+  function initTypingEffect() {
+    const heroTitle = document.querySelector('.hero-title');
+    if (!heroTitle) return;
+
+    const titles = [
+      'Senior Mobile App Developer',
+      'Flutter Expert',
+      'Solution Architect',
+      'Team Lead'
+    ];
+    let titleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isPaused = false;
+
+    // Set initial text (already in HTML)
+    const originalText = heroTitle.textContent;
+
+    function type() {
+      const currentTitle = titles[titleIndex];
+
+      if (isPaused) {
+        isPaused = false;
+        isDeleting = true;
+        setTimeout(type, 1500);
+        return;
+      }
+
+      if (isDeleting) {
+        charIndex--;
+        heroTitle.textContent = currentTitle.substring(0, charIndex);
+      } else {
+        charIndex++;
+        heroTitle.textContent = currentTitle.substring(0, charIndex);
+      }
+
+      // Add cursor element
+      const cursor = heroTitle.querySelector('.typewriter-cursor') || document.createElement('span');
+      cursor.className = 'typewriter-cursor';
+      heroTitle.appendChild(cursor);
+
+      let typeSpeed = isDeleting ? 30 : 60;
+
+      if (!isDeleting && charIndex === currentTitle.length) {
+        isPaused = true;
+        typeSpeed = 2500;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        titleIndex = (titleIndex + 1) % titles.length;
+        typeSpeed = 500;
+      }
+
+      setTimeout(type, typeSpeed);
+    }
+
+    // Start typing after page load
+    setTimeout(() => {
+      heroTitle.textContent = '';
+      type();
+    }, 1500);
+  }
+
+  // ========================================
+  // PARALLAX ON SCROLL (Subtle)
+  // ========================================
+  function initParallax() {
+    const heroText = document.querySelector('.hero-text');
+    const heroCardEl = document.querySelector('.hero-card');
+
+    if (!heroText || !heroCardEl || window.matchMedia('(max-width: 768px)').matches) return;
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY < window.innerHeight) {
+        heroText.style.transform = `translateY(${scrollY * 0.08}px)`;
+        heroCardEl.style.transform = `translateY(${scrollY * 0.04}px)`;
+      }
+    }, { passive: true });
+  }
+
+  // ========================================
+  // MAGNETIC BUTTON EFFECT
+  // ========================================
+  function initMagneticButtons() {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
+    const buttons = document.querySelectorAll('.btn-filled, .btn-tonal, .btn-outlined');
+    buttons.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  }
+
+  // ========================================
+  // CONSOLIDATED SCROLL HANDLER
+  // ========================================
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        handleNavScroll();
+        highlightActiveNav();
+        handleBackToTop();
+        updateScrollProgress();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ========================================
+  // INITIALIZATION
+  // ========================================
+  document.addEventListener('DOMContentLoaded', () => {
+    initScrollReveal();
+    animateCounters();
+    initSkillChipAnimation();
+    initTypingEffect();
+    initParallax();
+    initMagneticButtons();
+
+    // Initial calls
+    handleNavScroll();
+    highlightActiveNav();
+    handleBackToTop();
+    updateScrollProgress();
+  });
+
+  // ========================================
+  // KEYBOARD NAVIGATION: ESC closes mobile menu
+  // ========================================
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileMenu();
+    }
+  });
+
+})();
