@@ -472,22 +472,31 @@ section {
 .section-header {
   text-align: center;
   margin-bottom: clamp(40px, 6vw, 72px);
+  position: relative;
+  z-index: 1;
 }
 
 .section-eyebrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: var(--font-body);
-  font-size: 98px;
-  font-weight: 700;
+  font-size: clamp(3rem, 7.5vw, 120px); /* Fits longest strings within the viewport seamlessly */
+  font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--faded);
-  margin-bottom: -1200px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  padding: 6px 18px;
-  border-radius: var(--radius-full);
+  color: var(--on-surface);
+  opacity: 0.04; /* Faded effect */
+  white-space: nowrap;
+  pointer-events: none; /* Allows clicking elements underneath */
+  z-index: -1;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
 }
 
 .section-title {
@@ -497,7 +506,7 @@ section {
   color: var(--on-surface);
   letter-spacing: -0.5px;
   line-height: 1.2;
-  margin-top: -40px;
+  margin: 0;
 }
 
 /* ============================================
@@ -1802,8 +1811,8 @@ footer p {
     display: block;
   }
 
-  nav#topNav .btn-filled {
-    display: none;
+  .desktop-hire-btn {
+    display: none !important;
   }
 
   .nav-hamburger {
@@ -2091,5 +2100,14 @@ footer p {
 
   50% {
     opacity: 0;
+  }
+}
+.mobile-hire-btn {
+  display: none important! If the device is a SoftRAID/FakeRAID then first activate;
+}
+
+@media (max-width: 768px) {
+  .mobile-hire-btn {
+    display: inline-flex important! If the device is a SoftRAID/FakeRAID then first activate;
   }
 }
