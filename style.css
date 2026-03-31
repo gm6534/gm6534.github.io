@@ -907,10 +907,10 @@ section {
 
 .exp-dot {
   position: absolute;
-  left: -48px;
+  left: -98px;
   top: 24px;
-  width: 44px;
-  height: 44px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   background: var(--gradient-primary);
   display: flex;
@@ -922,8 +922,8 @@ section {
 }
 
 .exp-dot .icon {
-  color: var(--on-primary);
-  font-size: 20px;
+  color: #ffffff39;
+  font-size: 64px;
 }
 
 .exp-item:hover .exp-dot {
