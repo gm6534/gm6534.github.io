@@ -281,9 +281,9 @@
     if (!heroTitle) return;
 
     const titles = [
-      'Senior Mobile App Developer',
+      'Full Solution Architect',
       'Flutter Expert',
-      'Solution Architect',
+      'Software Engineer',
       'Team Lead'
     ];
     let titleIndex = 0;
