@@ -46,18 +46,18 @@
 
 <!-- NAV -->
 <nav id="topNav" role="navigation" aria-label="Main navigation">
-  <a href="#" class="nav-logo" aria-label="Home">GM</a>
+  <a href="#" class="nav-logo" aria-label="Home">GM.</a>
   <div class="nav-links" id="navLinks">
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#publications">Publications</a>
-    <a href="#education">Education</a>
+    <!-- <a href="#education">Education</a> -->
     <a href="#contact">Contact</a>
   </div>
-  <a class="btn-filled" href="https://mail.google.com/mail/?view=cm&fs=1&to=6534gm@gmail.com" target="_blank" id="hireBtn" style="font-size:13px;padding:9px 20px;">
+  <button class="btn-filled" id="hireBtn" style="font-size:13px;padding:9px 20px;" aria-haspopup="dialog">
     <span class="material-icons-round" style="font-size:16px;">mail</span>Hire Me
-  </a>
+  </button>
   <div class="nav-hamburger" id="navHamburger" role="button" aria-label="Toggle menu" aria-expanded="false" tabindex="0">
     <span></span>
     <span></span>
@@ -331,6 +331,11 @@
   <div class="section-header reveal">
     <div class="section-eyebrow">Portfolio</div>
     <h2 class="section-title">Featured Projects</h2>
+  </div>
+  <div class="project-filter" role="group" aria-label="Filter projects by platform">
+    <button class="project-filter-btn active" data-filter="all" type="button">All</button>
+    <button class="project-filter-btn" data-filter="mobile" type="button">Mobile</button>
+    <button class="project-filter-btn" data-filter="web" type="button">Web</button>
   </div>
   <div class="projects-grid">
 
@@ -716,6 +721,68 @@
 <button class="back-to-top" aria-label="Back to top" id="backToTop">
   <span class="material-icons-round" style="font-size:22px;">arrow_upward</span>
 </button>
+
+<!-- HIRE ME CHOICE MODAL -->
+<div class="modal-overlay hidden" id="hireModalOverlay" aria-hidden="true"></div>
+<div class="hire-modal hidden" id="hireModal" role="dialog" aria-modal="true" aria-labelledby="hireModalTitle">
+  <button class="modal-close" id="hireModalClose" aria-label="Close hire options">×</button>
+
+  <div id="hireStepSelect">
+    <h2 id="hireModalTitle">Hire Me</h2>
+    <p>Choose your preferred contact method and send a quick project questionnaire.</p>
+    <ul class="hire-options">
+      <li>
+        <button class="btn-tonal" id="whatsappHireBtn" type="button">
+          <span class="material-icons-round" style="font-size:16px;">chat</span> WhatsApp (Recommended)
+        </button>
+      </li>
+      <!-- <li>
+        <button class="btn-outlined" id="emailHireBtn" type="button">
+          <span class="material-icons-round" style="font-size:16px;">mail</span> Email
+        </button>
+      </li> -->
+    </ul>
+  </div>
+
+  <div id="hireEmailForm" class="hidden">
+    <h2>Email Inquiry</h2>
+    <p>Use the default questions or edit before sending.</p>
+    <form id="hireEmailFormElement">
+      <label>
+        Your Name
+        <input type="text" name="fullName" required placeholder="Your Name">
+      </label>
+      <label>
+        Company
+        <input type="text" name="company" placeholder="Company (optional)">
+      </label>
+      <label>
+        Project Name
+        <input type="text" name="projectName" required placeholder="Project Name">
+      </label>
+      <label>
+        Timeline
+        <input type="text" name="timeline" placeholder="e.g., 2 months">
+      </label>
+      <label>
+        Budget
+        <input type="text" name="budget" placeholder="e.g., $3000">
+      </label>
+      <label>
+        Key Requirements
+        <textarea name="requirements" rows="3" placeholder="List key requirements"></textarea>
+      </label>
+      <label>
+        Additional Notes
+        <textarea name="message" rows="3" placeholder="Anything else"></textarea>
+      </label>
+      <div class="modal-buttons">
+        <!-- <button type="button" id="backToContactChoice" class="btn-outlined">← Back</button> -->
+        <button type="submit" class="btn-filled">Send Email</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

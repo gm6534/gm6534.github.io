@@ -254,6 +254,59 @@
     observer.observe(skillsGrid);
   }
 
+  // ========================================
+  // PROJECT FILTERS
+  // ========================================
+  function initProjectFilters() {
+    const buttons = document.querySelectorAll('.project-filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+
+    const titlePlatformMap = {
+      'Apna BVS': 'mobile',
+      'Maalco Foods': 'mobile',
+      'TLS AMS App': 'mobile',
+      'Coach & Lead': 'mobile',
+      'LNPS App': 'mobile',
+      'TLS Interpreting App': 'mobile',
+      'GPT Stories For Kids': 'mobile',
+      'Triisum': 'mobile',
+      'American Lyceum SLMS': 'mobile',
+      'Cyber Gamer Exchange': 'web',
+      'Cybergift': 'web',
+      'Mastercard Gaming Exchange': 'web',
+      'Papersetting': 'web',
+      'International School of Musicians': 'web'
+    };
+
+    function getCardPlatform(card) {
+      if (card.dataset.platform) {
+        return card.dataset.platform;
+      }
+      const title = card.querySelector('.project-title')?.textContent?.trim() || '';
+      return titlePlatformMap[title] || 'all';
+    }
+
+    function applyFilter(filter) {
+      cards.forEach(card => {
+        const platform = getCardPlatform(card);
+        if (filter === 'all' || platform === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        const filter = button.getAttribute('data-filter');
+        applyFilter(filter);
+      });
+    });
+  }
+
   // Add CSS for skill chip animation
   const skillAnimStyle = document.createElement('style');
   skillAnimStyle.textContent = `
@@ -284,7 +337,7 @@
       'Full Solution Architect',
       'Flutter Expert',
       'Software Engineer',
-      'Team Lead'
+      'Team Leader'
     ];
     let titleIndex = 0;
     let charIndex = 0;
@@ -378,6 +431,123 @@
   }
 
   // ========================================
+  // HIRE ME CHANNEL SELECTOR
+  // ========================================
+  function initHireMeModal() {
+    const hireBtn = document.getElementById('hireBtn');
+    const hireModal = document.getElementById('hireModal');
+    const overlay = document.getElementById('hireModalOverlay');
+    const closeBtn = document.getElementById('hireModalClose');
+    const whatsappBtn = document.getElementById('whatsappHireBtn');
+    const emailBtn = document.getElementById('emailHireBtn');
+    const emailFormSection = document.getElementById('hireEmailForm');
+    const selectSection = document.getElementById('hireStepSelect');
+    const backToSelectBtn = document.getElementById('backToContactChoice');
+    const emailForm = document.getElementById('hireEmailFormElement');
+
+    const whatsappNumber = '+923174953538';
+    const emailAddress = '6534gm@gmail.com';
+
+    function openModal() {
+      hireModal.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+      hireModal.setAttribute('aria-hidden', 'false');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      // reset choose step
+      selectSection.classList.remove('hidden');
+      emailFormSection.classList.add('hidden');
+    }
+
+    function closeModal() {
+      hireModal.classList.add('hidden');
+      overlay.classList.add('hidden');
+      hireModal.setAttribute('aria-hidden', 'true');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function openEmailForm() {
+      selectSection.classList.add('hidden');
+      emailFormSection.classList.remove('hidden');
+    }
+
+    if (hireBtn) {
+      hireBtn.addEventListener('click', openModal);
+      hireBtn.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openModal();
+        }
+      });
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener('click', () => {
+        const defaultText = `Hi Ghulam, I found your profile and would like to discuss a project.
+
+Project type: 
+Timeline: 
+Budget: 
+Key requirements: 
+Additional notes: `;
+        const url = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(defaultText)}`;
+        window.open(url, '_blank');
+        closeModal();
+      });
+    }
+
+    if (emailBtn) {
+      emailBtn.addEventListener('click', () => {
+        openEmailForm();
+      });
+    }
+
+    if (backToSelectBtn) {
+      backToSelectBtn.addEventListener('click', () => {
+        selectSection.classList.remove('hidden');
+        emailFormSection.classList.add('hidden');
+      });
+    }
+
+    if (emailForm) {
+      emailForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const values = Object.fromEntries(new FormData(emailForm));
+        const subject = encodeURIComponent(`Project Inquiry: ${values.projectName || '[Project]'}`);
+        const body = encodeURIComponent(`Hi Ghulam,
+
+I would like to hire you for:
+- Project name: ${values.projectName}
+- Timeline: ${values.timeline}
+- Budget: ${values.budget}
+- Key requirements: ${values.requirements}
+- Additional notes: ${values.message}
+
+Name: ${values.fullName}
+Company: ${values.company}
+
+Please reply with availability and next steps.
+`);
+
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}&su=${subject}&body=${body}`;
+        window.open(gmailUrl, '_blank');
+        closeModal();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  }
+
+  // ========================================
   // CONSOLIDATED SCROLL HANDLER
   // ========================================
   let ticking = false;
@@ -403,6 +573,8 @@
     initScrollReveal();
     animateCounters();
     initSkillChipAnimation();
+    initProjectFilters();
+    initHireMeModal();
     initTypingEffect();
     initParallax();
     initMagneticButtons();
